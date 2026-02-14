@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 import warnings
 warnings.filterwarnings('ignore')
 
-# --- Custom CSS for Better UI ---
+# --- Custom CSS for Better UI - FIXED COLORS ---
 st.set_page_config(
     page_title="IntelliData Analyst Pro",
     layout="wide",
@@ -38,16 +38,35 @@ st.markdown("""
     }
     
     .metric-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
         border-radius: 15px;
         padding: 1.5rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        border: 1px solid #3d3d5c;
+        color: #ffffff;
     }
     
     .metric-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .metric-card h3 {
+        color: #a0a0b0;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-card h2 {
+        color: #ffffff;
+        font-size: 2rem;
+        margin: 0;
+    }
+    
+    .metric-card p {
+        color: #667eea;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
     }
     
     .insight-box {
@@ -59,13 +78,38 @@ st.markdown("""
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
     
+    .insight-box h3 {
+        color: #ffffff;
+        margin-top: 0;
+    }
+    
     .recommendation-card {
-        background: white;
+        background: #1e1e2e;
         border-left: 4px solid #667eea;
         padding: 1rem;
         margin: 0.5rem 0;
         border-radius: 0 8px 8px 0;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        color: #e0e0e0;
+    }
+    
+    .feature-card {
+        background: #1e1e2e;
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid #3d3d5c;
+        color: #ffffff;
+    }
+    
+    .feature-card h3 {
+        color: #667eea;
+        margin: 0.5rem 0;
+    }
+    
+    .feature-card p {
+        color: #b0b0c0;
+        margin: 0;
     }
     
     .stTabs [data-baseweb="tab-list"] {
@@ -73,10 +117,11 @@ st.markdown("""
     }
     
     .stTabs [data-baseweb="tab"] {
-        background-color: #f0f2f6;
+        background-color: #2d2d44;
         border-radius: 8px 8px 0 0;
         padding: 10px 20px;
         font-weight: 600;
+        color: #b0b0c0;
     }
     
     .stTabs [aria-selected="true"] {
@@ -97,13 +142,133 @@ st.markdown("""
     .anomaly-medium { background: #fef3c7; color: #d97706; }
     .anomaly-low { background: #d1fae5; color: #059669; }
     
-    .pulse {
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    /* Fix Streamlit default white backgrounds */
+    .stApp {
+        background-color: #0e0e16;
     }
     
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: .5; }
+    .stSidebar {
+        background-color: #161622;
+    }
+    
+    .stSidebar [data-testid="stMarkdown"] {
+        color: #e0e0e0;
+    }
+    
+    .stSidebar .stRadio label {
+        color: #e0e0e0;
+    }
+    
+    .stSidebar .stSelectbox label {
+        color: #e0e0e0;
+    }
+    
+    /* Fix expander colors */
+    .streamlit-expanderHeader {
+        background-color: #1e1e2e;
+        color: #e0e0e0;
+        border-radius: 8px;
+    }
+    
+    .streamlit-expanderContent {
+        background-color: #161622;
+        color: #e0e0e0;
+        border-radius: 0 0 8px 8px;
+    }
+    
+    /* Fix metric colors */
+    [data-testid="stMetricValue"] {
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        color: #a0a0b0 !important;
+    }
+    
+    [data-testid="stMetricDelta"] {
+        color: #667eea !important;
+    }
+    
+    /* Fix selectbox and other inputs */
+    .stSelectbox label, .stRadio label, .stSlider label {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Fix text in columns */
+    .stMarkdown p, .stMarkdown li {
+        color: #e0e0e0;
+    }
+    
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+        color: #ffffff;
+    }
+    
+    /* Fix info/warning boxes */
+    .stInfo {
+        background-color: #1e3a5f;
+        color: #e0f2fe;
+        border: 1px solid #3b82f6;
+    }
+    
+    .stWarning {
+        background-color: #451a03;
+        color: #fef3c7;
+        border: 1px solid #f59e0b;
+    }
+    
+    .stSuccess {
+        background-color: #064e3b;
+        color: #d1fae5;
+        border: 1px solid #10b981;
+    }
+    
+    .stError {
+        background-color: #450a0a;
+        color: #fee2e2;
+        border: 1px solid #ef4444;
+    }
+    
+    /* Fix checkbox */
+    .stCheckbox label {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Fix button */
+    .stButton button {
+        background-color: #667eea;
+        color: white;
+        border: none;
+    }
+    
+    .stButton button:hover {
+        background-color: #764ba2;
+    }
+    
+    /* Fix file uploader */
+    .stFileUploader label {
+        color: #e0e0e0 !important;
+    }
+    
+    /* Segment profile cards */
+    .segment-profile {
+        background: #1e1e2e;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 2px solid #3d3d5c;
+        color: #ffffff;
+    }
+    
+    .segment-profile h3 {
+        color: #667eea;
+        margin-top: 0;
+    }
+    
+    .segment-characteristic {
+        background: #2d2d44;
+        padding: 0.5rem;
+        border-radius: 6px;
+        margin: 0.25rem 0;
+        color: #e0e0e0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -111,9 +276,9 @@ st.markdown("""
 # --- Header ---
 st.markdown('<h1 class="main-header">🧠 IntelliData Analyst Pro</h1>', unsafe_allow_html=True)
 st.markdown("""
-<div style="text-align: center; color: #666; margin-bottom: 2rem;">
+<div style="text-align: center; color: #a0a0b0; margin-bottom: 2rem;">
     <b>100% Free • No API Keys • AI-Powered Insights • Runs Locally</b><br>
-    <span style="font-size: 0.9rem;">Advanced statistical analysis with intelligent recommendations</span>
+    <span style="font-size: 0.9rem; color: #808090;">Advanced statistical analysis with intelligent recommendations</span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -257,14 +422,32 @@ class InsightEngine:
                 'id': i,
                 'size': len(cluster_data),
                 'percentage': len(cluster_data) / len(self.df) * 100,
-                'characteristics': {}
+                'characteristics': {},
+                'dominant_features': []
             }
             
             for col in self.numeric_cols:
+                mean_val = cluster_data[col].mean()
+                overall_mean = self.df[col].mean()
+                overall_std = self.df[col].std()
+                
+                z_score = (mean_val - overall_mean) / overall_std if overall_std != 0 else 0
+                
                 profile['characteristics'][col] = {
-                    'mean': cluster_data[col].mean(),
-                    'vs_overall': (cluster_data[col].mean() - self.df[col].mean()) / self.df[col].std() if self.df[col].std() != 0 else 0
+                    'mean': mean_val,
+                    'vs_overall': z_score
                 }
+                
+                # Track dominant features (z-score > 0.5)
+                if abs(z_score) > 0.5:
+                    direction = "High" if z_score > 0 else "Low"
+                    profile['dominant_features'].append(f"{direction} {col}")
+            
+            # Create meaningful name based on dominant features
+            if profile['dominant_features']:
+                profile['name'] = " + ".join(profile['dominant_features'][:2])
+            else:
+                profile['name'] = f"Segment {i+1} (Average Profile)"
             
             segment_profiles.append(profile)
         
@@ -275,11 +458,17 @@ class InsightEngine:
         recommendations = []
         
         # Based on data type
-        if self.data_type == 'sales':
+        if self.data_type == 'e-commerce':
             recommendations.extend([
                 "💰 **Revenue Optimization**: Focus on high-margin products identified in top quartile",
                 "🎯 **Inventory Alert**: Monitor stock levels for items showing declining trends",
                 "📅 **Seasonal Prep**: Analyze day-of-week patterns for staffing optimization"
+            ])
+        elif self.data_type == 'saas':
+            recommendations.extend([
+                "📈 **Growth Focus**: Prioritize activation rate improvements for highest impact",
+                "🔄 **Retention**: Address churn patterns in identified risk segments",
+                "💵 **Pricing**: Test price elasticity on segments with low price sensitivity"
             ])
         elif self.data_type == 'hr':
             recommendations.extend([
@@ -385,18 +574,32 @@ def smart_clean_data(df):
     return df, report
 
 # --- Visualization Functions ---
-def create_kpi_cards(df, numeric_cols):
-    """Create animated KPI cards"""
-    cols = st.columns(min(4, len(numeric_cols)))
-    for i, col in enumerate(numeric_cols[:4]):
+def create_kpi_cards(df, numeric_cols, engine):
+    """Create animated KPI cards with actual metric names"""
+    # Calculate which metrics have most variance/interesting patterns
+    metric_scores = {}
+    for col in numeric_cols:
+        if len(df) > 1:
+            trend = abs(stats.linregress(range(len(df)), df[col].fillna(df[col].median()))[2])
+            volatility = df[col].std() / df[col].mean() if df[col].mean() != 0 else 0
+            metric_scores[col] = trend + volatility
+    
+    # Select top 4 most interesting metrics
+    top_metrics = sorted(metric_scores.items(), key=lambda x: x[1], reverse=True)[:4]
+    
+    cols = st.columns(min(4, len(top_metrics)))
+    for i, (col, score) in enumerate(top_metrics):
         with cols[i]:
             value = df[col].mean()
-            delta = ((df[col].iloc[-1] - df[col].iloc[0]) / df[col].iloc[0] * 100) if len(df) > 1 and df[col].iloc[0] != 0 else 0
+            # Calculate change if time series exists
+            delta = 0
+            if len(df) > 1 and df[col].iloc[0] != 0:
+                delta = ((df[col].iloc[-1] - df[col].iloc[0]) / df[col].iloc[0] * 100)
             
             st.metric(
                 label=col.replace('_', ' ').title(),
                 value=f"{value:,.2f}",
-                delta=f"{delta:.1f}%"
+                delta=f"{delta:.1f}%" if delta != 0 else None
             )
 
 def plot_distribution_analysis(df, col, engine):
@@ -426,7 +629,14 @@ def plot_distribution_analysis(df, col, engine):
             row=1, col=1
         )
     
-    fig.update_layout(height=600, showlegend=True, template='plotly_white')
+    fig.update_layout(
+        height=600, 
+        showlegend=True, 
+        template='plotly_dark',
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font_color='#e0e0e0'
+    )
     return fig
 
 def plot_time_series_advanced(df, date_col, metric_col, engine):
@@ -473,7 +683,10 @@ def plot_time_series_advanced(df, date_col, metric_col, engine):
         title=f"{metric_col} Over Time - {trend_data['trend']}",
         xaxis_title="Date",
         yaxis_title=metric_col,
-        template='plotly_white',
+        template='plotly_dark',
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font_color='#e0e0e0',
         height=500
     )
     
@@ -502,7 +715,12 @@ def plot_correlation_heatmap(df, numeric_cols):
                     line=dict(color="gold", width=3)
                 )
     
-    fig.update_layout(height=600)
+    fig.update_layout(
+        height=600,
+        template='plotly_dark',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font_color='#e0e0e0'
+    )
     return fig
 
 def plot_segmentation_3d(df, engine):
@@ -518,7 +736,14 @@ def plot_segmentation_3d(df, engine):
         df, x=cols[0], y=cols[1], z=cols[2],
         color='segment',
         title='3D Segment Visualization',
-        opacity=0.7
+        opacity=0.7,
+        color_continuous_scale='Viridis'
+    )
+    
+    fig.update_layout(
+        template='plotly_dark',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font_color='#e0e0e0'
     )
     
     return fig
@@ -570,10 +795,10 @@ def run_intelligent_analysis(df):
             st.write(f"• {insight}")
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # KPI Cards
+        # KPI Cards - Now showing actual metric names
         if engine.numeric_cols:
             st.subheader("📊 Key Metrics")
-            create_kpi_cards(df, engine.numeric_cols)
+            create_kpi_cards(df, engine.numeric_cols, engine)
         
         # Anomaly Summary
         if engine.numeric_cols:
@@ -673,7 +898,12 @@ def run_intelligent_analysis(df):
             
             if df[cat_col].nunique() <= 20:
                 fig = px.box(df, x=cat_col, y=num_col, color=cat_col,
-                           title=f"{num_col} by {cat_col}")
+                           title=f"{num_col} by {cat_col}",
+                           template='plotly_dark')
+                fig.update_layout(
+                    paper_bgcolor='rgba(0,0,0,0)',
+                    font_color='#e0e0e0'
+                )
                 st.plotly_chart(fig, use_container_width=True)
                 
                 # Statistical significance test
@@ -692,27 +922,35 @@ def run_intelligent_analysis(df):
             else:
                 st.warning("Need at least 3 numeric columns and 20 rows for 3D segmentation")
     
-    # TAB 4: Segmentation
+    # TAB 4: Segmentation - FIXED WITH ACTUAL KPI NAMES
     with tab4:
         profiles = engine.segmentation_analysis()
         if profiles:
             st.subheader("🎯 Automatic Segments")
             
+            # Display segments with meaningful names
             cols = st.columns(len(profiles))
             for i, profile in enumerate(profiles):
                 with cols[i]:
                     st.markdown(f"""
-                    <div class="metric-card">
-                        <h3>Segment {profile['id'] + 1}</h3>
-                        <h2>{profile['percentage']:.1f}%</h2>
-                        <p>{profile['size']} records</p>
+                    <div class="segment-profile">
+                        <h3>{profile['name']}</h3>
+                        <h2 style="color: #667eea; margin: 0.5rem 0;">{profile['percentage']:.1f}%</h2>
+                        <p style="color: #808090; margin: 0;">{profile['size']} records</p>
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    with st.expander("Characteristics"):
+                    with st.expander("View Characteristics"):
                         for char, values in profile['characteristics'].items():
                             direction = "↑" if values['vs_overall'] > 0 else "↓"
-                            st.write(f"{char}: {direction} {abs(values['vs_overall']):.1f}σ")
+                            color = "#10b981" if values['vs_overall'] > 0 else "#ef4444"
+                            st.markdown(
+                                f'<div class="segment-characteristic">'
+                                f'<span style="color: {color}; font-weight: bold;">{direction}</span> '
+                                f'<b>{char}</b>: {abs(values["vs_overall"]):.1f}σ from avg'
+                                f'</div>',
+                                unsafe_allow_html=True
+                            )
         else:
             st.info("Segmentation requires 2+ numeric columns and 20+ rows")
     
@@ -750,8 +988,13 @@ def run_intelligent_analysis(df):
             fig = px.scatter(priority_df, x='Impact (Volatility)', y='Trend Strength',
                            size='Priority', color='Priority', text='Metric',
                            title='Action Priority Matrix',
-                           color_continuous_scale='Viridis')
+                           color_continuous_scale='Viridis',
+                           template='plotly_dark')
             fig.update_traces(textposition='top center')
+            fig.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)',
+                font_color='#e0e0e0'
+            )
             st.plotly_chart(fig, use_container_width=True)
 
 # --- Sample Data Generator ---
@@ -838,26 +1081,29 @@ elif data_source == "Use Sample Data":
 if df is not None:
     run_intelligent_analysis(df)
 else:
-    # Landing page
+    # Landing page - FIXED COLORS
     st.markdown("""
     <div style="text-align: center; padding: 3rem;">
-        <h2>🚀 Welcome to IntelliData Analyst Pro</h2>
-        <p style="font-size: 1.2rem; color: #666;">
+        <h2 style="color: #ffffff;">🚀 Welcome to IntelliData Analyst Pro</h2>
+        <p style="font-size: 1.2rem; color: #a0a0b0;">
             Upload your data or try our sample datasets to get started with intelligent analysis.
         </p>
         <br>
         <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-            <div style="background: #f0f2f6; padding: 1.5rem; border-radius: 10px; width: 200px;">
+            <div class="feature-card">
                 <h3>📊</h3>
-                <p>Automatic Pattern Detection</p>
+                <h4 style="color: #667eea; margin: 0.5rem 0;">Automatic Pattern Detection</h4>
+                <p>Statistical anomaly & trend detection</p>
             </div>
-            <div style="background: #f0f2f6; padding: 1.5rem; border-radius: 10px; width: 200px;">
+            <div class="feature-card">
                 <h3>🎯</h3>
-                <p>Smart Recommendations</p>
+                <h4 style="color: #667eea; margin: 0.5rem 0;">Smart Recommendations</h4>
+                <p>AI-powered business insights</p>
             </div>
-            <div style="background: #f0f2f6; padding: 1.5rem; border-radius: 10px; width: 200px;">
+            <div class="feature-card">
                 <h3>🔮</h3>
-                <p>Predictive Forecasting</p>
+                <h4 style="color: #667eea; margin: 0.5rem 0;">Predictive Forecasting</h4>
+                <p>Linear regression & segmentation</p>
             </div>
         </div>
     </div>
@@ -866,8 +1112,8 @@ else:
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: #888; font-size: 0.9rem;">
-    🧠 <b>IntelliData Analyst Pro</b> | 100% Free & Open Source | No API Keys Required<br>
+<div style="text-align: center; color: #808090; font-size: 0.9rem;">
+    🧠 <b style="color: #a0a0b0;">IntelliData Analyst Pro</b> | 100% Free & Open Source | No API Keys Required<br>
     Built with Streamlit • Scikit-Learn • Plotly • Statistical Analysis Engine
 </div>
 """, unsafe_allow_html=True)
